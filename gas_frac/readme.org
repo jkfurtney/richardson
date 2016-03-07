@@ -1,0 +1,24 @@
+#+TITLE: Gas flow in a fracture
+#+DATE:
+#+OPTIONS: toc:nil date:nil
+#+LATEX_HEADER: \usepackage[margin=1.in]{geometry}
+#+STARTUP: showall
+
+
+- =comfl.py= shows a simple finite difference solution to this system.
+  There is a problem with ringing around the shocks because space
+  centered derivatives are used. This should be replaced with up-wind
+  second order derivatives (high resolution FV methods, LeVeque,
+  2002). Or DG.
+
+- =comfl_load_drag_pl.py= This is an extension of the above which adds
+  the fracture drag force. This is run at several different fracture
+  apertures to get an approximate steady state velocity at these apertures.
+
+
+\begin{eqnarray*}
+\frac{\partial\rho}{\partial t}+\frac{\partial}{\partial x}\left(\rho v_{f}\right) & = & 0\\
+\frac{\partial v_{f}}{\partial t}+v_{f}\frac{\partial v_{f}}{\partial x}+\frac{1}{\rho}\frac{\partial p}{\partial x}+\frac{\varphi}{2}\frac{v_{f}^{2}}{w} & = & 0\\
+\frac{\partial T}{\partial t}+v_{f}\frac{\partial T}{\partial x}+(\gamma-1)T\frac{\partial v_{f}}{\partial x} & = & 0\\
+p & = & \rho RT\\
+\varphi & = & 0.2\left(\frac{\epsilon}{w}\right)^{\frac{1}{2}}\end{eqnarray*}
